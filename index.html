@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Needles Track Pants Feed</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    #error { color: red; }
+  </style>
+</head>
+<body>
+  <h1>Needles Track Pants Feed</h1>
+  <p id="last-updated"></p>
+  <ul id="feed"></ul>
+  <p id="error" style="display:none"></p>
+  <script>
+    async function loadFeed() {
+      const errorEl = document.getElementById('error');
+      const lastUpdatedEl = document.getElementById('last-updated');
+      const feedEl = document.getElementById('feed');
+      try {
+        const resp = await fetch('data.json');
+        if (!resp.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await resp.json();
+        if (data.length > 0) {
+          const lastUpdated = data.reduce((max, item) => {
+            return item.fetched_at && item.fetched_at > max ? item.fetched_at : max;
+          }, data[0].fetched_at || '');
+          lastUpdatedEl.textContent = 'Last updated: ' + (lastUpdated ? new Date(lastUpdated).toLocaleString() : 'n/a');
+          data.forEach(item => {
+            const li = document.createElement('li');
+            const price = item.price ? ` – ${item.price}` : '';
+            li.innerHTML = `<a href="${item.url}">${item.title}</a>${price}`;
+            feedEl.appendChild(li);
+          });
+        } else {
+          lastUpdatedEl.textContent = 'Last updated: n/a';
+          const li = document.createElement('li');
+          li.textContent = 'No items found';
+          feedEl.appendChild(li);
+        }
+      } catch (err) {
+        errorEl.textContent = 'Failed to load feed.';
+        errorEl.style.display = 'block';
+      }
+    }
+    loadFeed();
+  </script>
+</body>
+</html>
