@@ -30,3 +30,16 @@ newest listing date.
 
 Before scraping any website, ensure that doing so complies with the
 website's terms of service.
+
+## GitHub Pages
+
+The contents of this repository are served on GitHub Pages at
+`https://<username>.github.io/shopnews3/`.
+
+GitHub Pages publishes straight from the `main` branch. To update the
+live site:
+
+1. Run `python feed.py` to scrape new listings and update `data.json`.
+2. Commit the updated files and push to `main`.
+3. GitHub Pages will automatically deploy the changes.
+
