@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "site": "eBay",
+    "title": "Needles Track Pants - Black/Purple",
+    "price": "$200",
+    "url": "https://www.example.com/item1",
+    "date": "2025-02-20T12:00:00",
+    "fetched_at": "2025-02-20T12:05:00"
+  },
+  {
+    "site": "eBay",
+    "title": "Needles Track Pants - Blue",
+    "price": "$180",
+    "url": "https://www.example.com/item2",
+    "date": "2025-02-21T09:30:00",
+    "fetched_at": "2025-02-21T09:35:00"
+  }
+]
