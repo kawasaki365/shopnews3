@@ -18,6 +18,8 @@ import schedule
 from scrapers import scrape_ebay
 
 DATA_FILE = Path("data.json")
+# Maximum number of items to keep in the feed
+MAX_ITEMS = 200
 
 
 def load_data() -> List[Dict[str, str]]:
@@ -43,6 +45,9 @@ def scrape_once() -> List[Dict[str, str]]:
             new_items.append(item)
 
     data.sort(key=lambda x: x.get("date"), reverse=True)
+    # Keep only the most recent MAX_ITEMS entries
+    if len(data) > MAX_ITEMS:
+        data = data[:MAX_ITEMS]
     save_data(data)
     return new_items
 
