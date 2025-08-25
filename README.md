@@ -26,7 +26,8 @@ python feed.py --loop
 
 Results are stored in `data.json`. Each entry contains the title, price,
 URL and listing date. The feed printed to the console is sorted by the
-newest listing date.
+newest listing date. The file is trimmed to the latest 200 entries, and
+the web frontend displays at most that many listings.
 
 Before scraping any website, ensure that doing so complies with the
 website's terms of service.
